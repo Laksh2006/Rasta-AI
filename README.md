@@ -1,290 +1,329 @@
-# RaastaAI
+# 🛣️ RaastaAI
+### Smart Road Issue Reporting & Resolution Platform
 
-**AI-Powered Civic Issue Reporting and Road Safety Platform**
+<div align="center">
 
-[![Live Demo](https://img.shields.io/badge/Live-Vercel-black?logo=vercel)](https://rasta-ai-ecru.vercel.app)
-[![AWS](https://img.shields.io/badge/Deployed-AWS%20EC2-orange?logo=amazonaws)](http://3.104.66.81)
+**Report. Track. Resolve.**
 
-RaastaAI is a civic technology platform that lets citizens report road-related problems and public infrastructure issues, track their progress, and follow the resolution workflow from submission to closure.
+*Building Better Roads for a Better Tomorrow.*
 
----
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?logo=tailwindcss&logoColor=white)
 
-## Table of Contents
-
-1. [Project Overview](#1-project-overview)
-2. [Key Features](#2-key-features)
-3. [Technology Stack](#3-technology-stack)
-4. [Implementation Details](#4-implementation-details)
-5. [Screenshots](#5-screenshots)
-6. [Deployment](#6-deployment)
-7. [Setup and Usage](#7-setup-and-usage)
-8. [Project Status and Limitations](#8-project-status-and-limitations)
+</div>
 
 ---
 
-## 1. Project Overview
+## 🌍 About the Project
 
-### Problem Statement
+RaastaAI is a smart civic technology platform designed to connect citizens with municipal authorities to improve road infrastructure.
 
-Citizens regularly face potholes, waterlogging, damaged roads, and other public infrastructure problems. Traditional complaint systems make it hard to report an issue accurately and even harder to find out what happened to it afterwards. Reports get lost, there is little feedback, and residents have no visibility into whether anyone is acting on their complaint.
+The platform enables citizens to report road-related problems such as potholes, damaged roads, and waterlogging by submitting photographs and location information.
 
-### Our Solution
+Municipal administrators can review complaints, verify reported issues, assign repair teams, manage repair activities, and monitor complaint resolution.
 
-RaastaAI makes civic reporting simple and transparent. Citizens can submit a complaint with a category, priority, photograph, and location, then follow it through a clear status timeline. Administrators get a portal to review and manage incoming reports.
+**Our mission is to make road maintenance more transparent, efficient, and accessible through technology.**
 
-### Target Users
+## 🎯 Problem Statement
 
-| User | How they use RaastaAI |
-|------|-----------------------|
-| Citizens | Report issues, track complaints, view the road map |
-| Municipal authorities | Review reports and follow resolution workflows |
-| Administrators | Manage complaints and monitor the platform through the Admin Portal |
+Road damage, potholes, and waterlogging create serious inconvenience and safety risks for citizens.
 
----
+Traditional complaint systems often lack transparency, efficient tracking, and proper communication between citizens and municipal authorities.
 
-## 2. Key Features
+RaastaAI addresses these challenges through a centralized digital platform for road issue reporting and complaint management.
 
-- **Citizen Dashboard**: overview of the user's activity and complaints
-- **Report Issue**: submit a complaint with details, category, and priority
-- **Complaint Categories and Priority Levels**: classify issues such as potholes and waterlogging
-- **Complaint Photographs**: attach and view images with each report
-- **Location and GPS Information**: pin where the issue is
-- **My Reports**: see every complaint you have submitted
-- **Road Map**: view reported issues on a map-style interface
-- **Complaint Status Tracking**: know whether a complaint is pending, in progress, or resolved
-- **Resolution Workflow Timeline**: step-by-step history of how a complaint progressed
-- **User Profile**: manage account details
-- **Admin Portal**: administrator view for managing complaints
-- **Notification Interface**: updates about complaint activity
+## ✨ Key Features
 
----
+### 👤 Citizen Portal
 
-## 3. Technology Stack
+- Report potholes, damaged roads, and waterlogging.
+- Upload photographs as evidence of road damage.
+- Provide geographical location information.
+- Track complaints using unique complaint IDs.
+- View previously submitted complaints.
+- Receive complaint progress notifications.
+- Explore reported road issues on interactive maps.
+- Manage citizen profile information.
 
-| Layer | Technology |
-|-------|-----------|
-| Frontend | React.js |
-| Language | TypeScript |
-| Build tool | Vite |
-| Styling | CSS |
-| AI integration | Google Gemini API (key supplied via environment variable) |
-| Web server (AWS) | Nginx |
-| Cloud hosting | AWS EC2 (t3.micro, Amazon Linux) |
-| Frontend hosting | Vercel |
-| Backend / Database | `[ADD: to be confirmed]` |
+### 🛠️ Municipal Admin Dashboard
 
----
+- Monitor complaints and municipal activities.
+- Review and manage citizen reports.
+- Verify or reject submitted complaints.
+- Manage repair team assignments.
+- Organize complaints according to priority.
+- Update complaint statuses.
+- Manage repair-related photographs.
+- View complaint analytics and statistics.
+- Monitor reported issues geographically.
+- Receive complaint activity notifications.
 
-## 4. Implementation Details
+### 📍 Complaint Tracking
 
-### Project Structure
+Complaint statuses include:
 
-```
-Rasta-AI/
-├── public/            # Static public assets
-├── screenshots/       # Project screenshots used in this README
-├── src/
-│   ├── components/    # Reusable UI components
-│   ├── data/          # Demo data and image references
-│   └── ...            # Application source code
-├── .env.example       # Environment variable template
-├── package.json       # Dependencies and scripts
-├── vite.config.ts     # Vite configuration
-└── README.md
-```
+1. Submitted
+2. Verified
+3. Assigned
+4. In Progress
+5. Resolved
+6. Rejected
 
-### How It Works
-
-- **Single-page application**: the UI is built with React and TypeScript, bundled by Vite into static files in `dist/`.
-- **Component-based UI**: reusable components in `src/components/` are shared across the dashboard, report form, complaint lists, timeline, and admin views.
-- **Demo data**: `src/data/` holds sample complaints and image references used to populate the interface.
-- **AI configuration**: the Google Gemini API key is read from an environment variable (see `.env.example`), so no secret is committed to the repository.
-- **Static deployment**: because the build output is plain static files, the same build is served by Nginx on AWS EC2 and by Vercel.
-
-> `[ADD: short description of any specific logic you want to highlight, e.g. how priority levels are assigned or how the timeline is rendered]`
+Each complaint receives a unique tracking ID.
 
 ---
 
-## 5. Screenshots
+## 📸 Application Screenshots
 
-### Citizen Dashboard
-The home screen greets the citizen and offers quick access to **Track Complaint**, **Nearby Issues**, and **My Reports**.
+Explore the RaastaAI platform interface through its actual application views:
 
-![Citizen Dashboard](screenshots/dashboard.png)
+### 1. Citizen Dashboard
+The citizen home portal provides quick actions to report road hazards, lookup active complaint statuses, and review municipal announcements.
 
-### Recent Reports and Complaint Status
-Recent complaints appear with their photo, complaint ID, location, date, and a status label (Submitted, Verified, In Progress). A Civic Watcher badge rewards active reporters.
+![Citizen Dashboard](screenshots/citizen-dashboard.png)
+
+### 2. Recent Reports
+Displays submitted community reports with real-time status badges (`SUBMITTED`, `VERIFIED`, `IN PROGRESS`), location details, and community watcher milestones.
 
 ![Recent Reports](screenshots/recent-reports.png)
 
-### Report a Road Issue
-The report form starts with a photograph (upload from device, take a photo, or choose from previous records), followed by issue category and the remaining details.
+### 3. Report a Road Issue
+Enables citizens to upload photographic evidence of road damage, select issue categories (potholes, waterlogging, damaged roads), and capture location coordinates.
 
-![Report Issue](screenshots/report-issue.png)
+![Report Road Issue](screenshots/report-issue.png)
 
-### Municipal Admin Portal
-The Executive Road Intelligence Dashboard shows total, pending, in-progress, and resolved counts, complaints by category, and a status distribution chart. The sidebar gives access to All Complaints, Pending Verification, Verified, Assigned, In Progress, Resolved, Road Map, Analytics, and Settings.
+### 4. Municipal Admin Dashboard
+The municipal operations control room featuring real-time reporting triage, live issue metrics, resolution completion rates, and defect distribution charts.
 
-![Admin Portal](screenshots/admin-portal.png)
-
----
-
-## 6. Deployment
-
-RaastaAI is deployed on two platforms.
-
-### Live Links
-
-| Platform | Link |
-|----------|------|
-| Vercel (live website) | https://rasta-ai-ecru.vercel.app |
-| AWS EC2 (public IP) | http://3.104.66.81 |
-| GitHub repository | https://github.com/Laksh2006/Rasta-AI |
-
-### AWS Deployment Details
-
-| Setting | Value |
-|---------|-------|
-| Service | Amazon EC2 |
-| Instance type | t3.micro |
-| Operating system | Amazon Linux |
-| Web server | Nginx |
-| Port | 80 (HTTP) |
-| Public IP | 3.104.66.81 |
-
-**Steps used to deploy on EC2** (adjust to match what you actually ran):
-
-1. Launch a `t3.micro` Amazon Linux instance and open **port 80** (HTTP) and **port 22** (SSH) in the security group.
-2. Connect over SSH and install the tools:
-   ```bash
-   sudo dnf update -y
-   sudo dnf install -y nginx git nodejs
-   ```
-3. Clone the repository and build the app:
-   ```bash
-   git clone https://github.com/Laksh2006/Rasta-AI.git
-   cd Rasta-AI
-   npm install
-   npm run build
-   ```
-4. Copy the build output to the Nginx web root:
-   ```bash
-   sudo cp -r dist/* /usr/share/nginx/html/
-   ```
-5. Start Nginx and enable it on boot:
-   ```bash
-   sudo systemctl start nginx
-   sudo systemctl enable nginx
-   ```
-6. Open `http://3.104.66.81` in a browser.
-
-> Note: an EC2 public IP can change if the instance is stopped and restarted, unless an Elastic IP is attached. Update the link above if it changes.
-
-### Vercel Deployment Details
-
-| Setting | Value |
-|---------|-------|
-| Platform | Vercel |
-| Framework preset | Vite |
-| Source | GitHub repository (`Laksh2006/Rasta-AI`) |
-| Build command | `npm run build` |
-| Output directory | `dist` |
-
-Add the Gemini API key as an environment variable in the Vercel project settings if you want the AI feature enabled.
+![Municipal Admin Dashboard](screenshots/admin-dashboard.png)
 
 ---
 
-## 7. Setup and Usage
+## 🖥️ Technology Stack
+
+| Technology | Purpose |
+|---|---|
+| React 19 | Frontend development |
+| TypeScript | Type-safe development |
+| Vite | Development and build tool |
+| Tailwind CSS | UI styling |
+| Leaflet.js | Interactive maps |
+| OpenStreetMap | Map tiles |
+| Recharts | Data visualization |
+| Lucide React | Icons |
+| Motion | UI animations |
+| LocalStorage | Browser data persistence |
+| Google GenAI SDK | AI integration dependency |
+
+## 📂 Project Structure
+
+```text
+RaastaAI/
+│
+├── public/
+│   └── images/
+│       ├── pothole-1.jpg
+│       ├── pothole-2.jpg
+│       ├── pothole-3.jpg
+│       ├── waterlogging-1.jpg
+│       ├── waterlogging-2.jpg
+│       ├── waterlogging-3.jpg
+│       ├── damaged-1.jpg
+│       ├── damaged-2.jpg
+│       ├── damaged-3.jpg
+│       ├── repair-1.jpg
+│       ├── repair-2.jpg
+│       ├── repair-3.jpg
+│       └── fallback.jpg
+│
+├── screenshots/
+│   ├── admin-dashboard.png
+│   ├── citizen-dashboard.png
+│   ├── recent-reports.png
+│   └── report-issue.png
+│
+├── src/
+│   ├── components/
+│   │   ├── admin/
+│   │   ├── citizen/
+│   │   ├── auth/
+│   │   └── common/
+│   │
+│   ├── data/
+│   │   ├── demoImages.ts
+│   │   └── initialComplaints.ts
+│   │
+│   ├── services/
+│   │   └── dataService.ts
+│   │
+│   ├── types/
+│   │   └── index.ts
+│   │
+│   ├── App.tsx
+│   ├── index.css
+│   └── main.tsx
+│
+├── .env.example
+├── .gitignore
+├── index.html
+├── metadata.json
+├── package.json
+├── package-lock.json
+├── bun.lock
+├── tsconfig.json
+├── vite.config.ts
+└── README.md
+```
+
+## ⚙️ Installation & Setup
+
+Follow these steps to run RaastaAI locally.
 
 ### Prerequisites
 
-- Node.js 18 or later
+- Node.js
 - npm
 - Git
+- VS Code or Google Antigravity
 
-### Installation
+### 1. Clone the Repository
 
 ```bash
-# 1. Clone the repository
-git clone https://github.com/Laksh2006/Rasta-AI.git
-cd Rasta-AI
+git clone https://github.com/YOUR-USERNAME/RaastaAI.git
+```
 
-# 2. Install dependencies
+### 2. Navigate to the Project
+
+```bash
+cd RaastaAI
+```
+
+### 3. Install Dependencies
+
+```bash
 npm install
-
-# 3. Create your environment file
-cp .env.example .env
 ```
 
-Open `.env` and add your Google Gemini API key. Use the variable name shown in `.env.example`.
-
-```env
-# Example only. Check .env.example for the exact variable name.
-VITE_GEMINI_API_KEY=your_api_key_here
-```
-
-> Never commit your `.env` file or share your API key.
-
-### Run Locally
+### 4. Start the Development Server
 
 ```bash
 npm run dev
 ```
 
-Vite prints a local address, usually `http://localhost:5173`. Open it in your browser.
+### 5. Open in Browser
 
-### Build for Production
+Visit the local address displayed in your terminal.
 
-```bash
-npm run build
-npm run preview   # optional: preview the production build locally
+For example:
+
+```text
+http://localhost:3000
 ```
 
-The production files are generated in `dist/`.
+## 🔐 Demo Login Credentials
 
-### Using the App
+Use the predefined demonstration accounts to explore the application.
 
-1. Open the **Citizen Dashboard** to see an overview.
-2. Go to **Report Issue**, choose a category and priority, add a photo and location, and submit.
-3. Open **My Reports** to see your complaints and their current status.
-4. Open a complaint to follow its **Resolution Workflow Timeline**.
-5. Use **Road Map** to view reported issues by location.
-6. Check **Notifications** for updates and **Profile** to manage your account.
-7. Administrators use the **Admin Portal** to review and manage complaints.
+**Citizen Account**
+
+```text
+Email: citizen@raastaai.demo
+Password: citizen123
+```
+
+**Municipal Admin Account**
+
+```text
+Email: admin@raastaai.demo
+Password: admin123
+```
+
+The login page also provides one-click demo access.
+
+> Note: These are demonstration credentials, not production authentication accounts.
+
+## 🔄 How RaastaAI Works
+
+1. **Report:** Citizens submit road complaints with photographs and location information.
+2. **Registration:** The application generates a unique complaint ID.
+3. **Verification:** Municipal administrators review submitted complaints.
+4. **Assignment:** Verified complaints can be assigned to repair teams.
+5. **Progress:** Administrators update complaint statuses.
+6. **Resolution:** Completed repair work is marked as resolved.
+7. **Tracking:** Citizens can follow complaint progress.
+
+## 💾 Data Management
+
+The current prototype uses browser LocalStorage to maintain:
+
+- Complaint records
+- Notification information
+- Demonstration user sessions
+
+Initial demonstration complaints and notifications are included in the project.
+
+Data is stored locally in the browser and is not synchronized between different users or devices.
+
+## 🧪 Available Commands
+
+| Command | Description |
+|---|---|
+| `npm install` | Install project dependencies |
+| `npm run dev` | Start development server |
+| `npm run build` | Create production build |
+| `npm run preview` | Preview production build |
+| `npm run lint` | Run lint checks, if configured |
+
+## 🚀 Future Enhancements
+
+- AI-powered pothole detection using computer vision.
+- Automatic road damage severity classification.
+- AI-assisted road condition analysis.
+- Secure backend and database integration.
+- Production-ready authentication.
+- Real-time notifications.
+- Live repair team tracking.
+- Municipal corporation integration.
+- Mobile application support.
+- Advanced road condition analytics.
+
+## ⚠️ Current Project Limitations
+
+- The current project is a frontend-oriented demonstration prototype.
+- Authentication uses predefined demo credentials.
+- Complaint and notification data are stored using browser LocalStorage.
+- A shared production database is not currently implemented.
+- AI-powered road damage detection is a planned enhancement, not a confirmed implemented feature.
+- Production deployment requires secure backend services and authentication.
+
+## 🌱 Vision
+
+Our vision is to build smarter, safer, and better-connected cities by making civic issue reporting easier and road maintenance more transparent.
+
+We believe every citizen deserves better roads and an effective way to report infrastructure problems.
+
+## 🤝 Contributions
+
+Suggestions, feedback, and contributions are welcome!
+
+If you have ideas to improve RaastaAI, feel free to open an issue or submit a pull request.
+
+## ⭐ Support the Project
+
+If you like the idea behind RaastaAI, consider giving the repository a star on GitHub.
 
 ---
 
-## 8. Project Status and Limitations
+<div align="center">
 
-This section lists what is and is not fully implemented, so the documentation stays accurate.
+# 🛣️ RaastaAI
 
-- The frontend interface and the features listed above are implemented using demo data from `src/data/`. The app includes a **Switch to Municipal Admin** toggle and a **Reset Demo** option for presentations.
-- The figures on the admin dashboard (for example total reports and resolution rate) are sample values for demonstration, not live statistics.
-- Google Gemini API configuration is provided through environment variables. `[VERIFY: whether live AI responses are working in the deployed app]`
-- Backend, database, and authentication: `[VERIFY: describe what exists, or state that data is currently demo data and these are planned]`
+### Report. Track. Resolve.
 
-### Future Improvements
+**Building Better Roads for a Better Tomorrow.**
 
-- Persistent backend and database for complaints
-- User authentication and role-based access for citizens, authorities, and admins
-- Real-time notifications
-- AI-based issue classification and priority suggestions from uploaded photos
+Made with ❤️ for smarter communities.
 
----
-
-## License
-
-`[ADD: license, e.g. MIT]`
-
-## Team
-
-**Team Name:** Unique Stars
-
-| Role | Name |
-|------|------|
-| Team Leader | Krupal |
-| Member | Bharatesh |
-| Member | Laksh |
-| Member | Nitinkumar |
-
-`[ADD: institution / course name, if required]`
+</div>

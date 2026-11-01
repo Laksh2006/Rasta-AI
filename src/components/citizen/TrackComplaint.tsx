@@ -17,6 +17,7 @@ import {
 import { Complaint, ComplaintStatus } from '../../types';
 import { getComplaints } from '../../services/dataService';
 import { LeafletMap } from '../common/LeafletMap';
+import { handleImageError, FALLBACK_REPAIR_IMAGE } from '../../data/demoImages';
 
 interface TrackComplaintProps {
   initialComplaintId?: string;
@@ -155,11 +156,10 @@ export const TrackComplaint: React.FC<TrackComplaintProps> = ({
                 setSearchQuery(c.id);
                 setSearchError('');
               }}
-              className={`px-2.5 py-1 rounded-lg text-xs font-mono font-bold transition-colors ${
-                activeComplaintId === c.id
+              className={`px-2.5 py-1 rounded-lg text-xs font-mono font-bold transition-colors ${activeComplaintId === c.id
                   ? 'bg-[#142D4E] text-white'
                   : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
-              }`}
+                }`}
             >
               {c.id} ({c.status})
             </button>
@@ -179,14 +179,13 @@ export const TrackComplaint: React.FC<TrackComplaintProps> = ({
                     {currentComplaint.id}
                   </span>
                   <span
-                    className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${
-                      currentComplaint.status === 'Resolved' ? 'bg-emerald-100 text-emerald-800' :
-                      currentComplaint.status === 'In Progress' ? 'bg-amber-100 text-amber-800' :
-                      currentComplaint.status === 'Assigned' ? 'bg-purple-100 text-purple-800' :
-                      currentComplaint.status === 'Verified' ? 'bg-blue-100 text-blue-800' :
-                      currentComplaint.status === 'Rejected' ? 'bg-red-100 text-red-800' :
-                      'bg-orange-100 text-orange-800'
-                    }`}
+                    className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${currentComplaint.status === 'Resolved' ? 'bg-emerald-100 text-emerald-800' :
+                        currentComplaint.status === 'In Progress' ? 'bg-amber-100 text-amber-800' :
+                          currentComplaint.status === 'Assigned' ? 'bg-purple-100 text-purple-800' :
+                            currentComplaint.status === 'Verified' ? 'bg-blue-100 text-blue-800' :
+                              currentComplaint.status === 'Rejected' ? 'bg-red-100 text-red-800' :
+                                'bg-orange-100 text-orange-800'
+                      }`}
                   >
                     {currentComplaint.status}
                   </span>
@@ -205,11 +204,10 @@ export const TrackComplaint: React.FC<TrackComplaintProps> = ({
               <div className="flex items-center gap-2">
                 <span className="text-xs font-semibold text-slate-400">Severity:</span>
                 <span
-                  className={`px-2.5 py-1 rounded-lg text-xs font-bold ${
-                    currentComplaint.severity === 'High' ? 'bg-red-50 text-red-700 border border-red-200' :
-                    currentComplaint.severity === 'Medium' ? 'bg-amber-50 text-amber-700 border border-amber-200' :
-                    'bg-slate-100 text-slate-700'
-                  }`}
+                  className={`px-2.5 py-1 rounded-lg text-xs font-bold ${currentComplaint.severity === 'High' ? 'bg-red-50 text-red-700 border border-red-200' :
+                      currentComplaint.severity === 'Medium' ? 'bg-amber-50 text-amber-700 border border-amber-200' :
+                        'bg-slate-100 text-slate-700'
+                    }`}
                 >
                   {currentComplaint.severity} Priority
                 </span>
@@ -285,12 +283,7 @@ export const TrackComplaint: React.FC<TrackComplaintProps> = ({
                     src={currentComplaint.imageUrl}
                     alt={currentComplaint.id}
                     className="w-full h-full object-cover"
-                    onError={(e) => {
-                      (e.target as HTMLElement).setAttribute(
-                        'src',
-                        'https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?auto=format&fit=crop&w=400&q=80'
-                      );
-                    }}
+                    onError={handleImageError}
                   />
                   <span className="absolute bottom-2 left-2 px-2 py-0.5 rounded text-[10px] font-bold bg-black/60 text-white">
                     Citizen Photo
@@ -326,6 +319,7 @@ export const TrackComplaint: React.FC<TrackComplaintProps> = ({
                       src={currentComplaint.imageUrl}
                       alt="Before repair"
                       className="w-full h-full object-cover"
+                      onError={handleImageError}
                     />
                   </div>
                   <div className="p-3 text-xs text-slate-500">
@@ -347,6 +341,7 @@ export const TrackComplaint: React.FC<TrackComplaintProps> = ({
                       src={currentComplaint.repairEvidenceImage}
                       alt="After repair"
                       className="w-full h-full object-cover"
+                      onError={(e) => handleImageError(e, FALLBACK_REPAIR_IMAGE)}
                     />
                   </div>
                   <div className="p-3 text-xs text-slate-700 bg-emerald-50/30">
@@ -388,13 +383,12 @@ export const TrackComplaint: React.FC<TrackComplaintProps> = ({
                     <div key={stage.status} className="relative flex items-start gap-4">
                       {/* Timeline Node Indicator */}
                       <div
-                        className={`absolute -left-6 sm:-left-8 w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center transition-all ${
-                          isCompleted
+                        className={`absolute -left-6 sm:-left-8 w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center transition-all ${isCompleted
                             ? 'bg-[#16A36A] text-white shadow-md ring-4 ring-emerald-50'
                             : isActive
-                            ? 'bg-[#142D4E] text-white shadow-md ring-4 ring-blue-50'
-                            : 'bg-slate-200 text-slate-400'
-                        }`}
+                              ? 'bg-[#142D4E] text-white shadow-md ring-4 ring-blue-50'
+                              : 'bg-slate-200 text-slate-400'
+                          }`}
                       >
                         <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                       </div>
@@ -403,9 +397,8 @@ export const TrackComplaint: React.FC<TrackComplaintProps> = ({
                       <div className="flex-1 bg-slate-50/70 p-4 rounded-2xl border border-slate-100">
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-1">
                           <h4
-                            className={`font-bold text-sm ${
-                              isCompleted ? 'text-slate-900' : 'text-slate-400'
-                            }`}
+                            className={`font-bold text-sm ${isCompleted ? 'text-slate-900' : 'text-slate-400'
+                              }`}
                           >
                             {stage.label}
                           </h4>

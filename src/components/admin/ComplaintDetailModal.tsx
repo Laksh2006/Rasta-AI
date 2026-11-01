@@ -22,6 +22,7 @@ import {
 import { Complaint, DemoImage } from '../../types';
 import { LeafletMap } from '../common/LeafletMap';
 import { RepairImageLibraryModal } from './RepairImageLibraryModal';
+import { handleImageError, FALLBACK_REPAIR_IMAGE } from '../../data/demoImages';
 import {
   verifyComplaint,
   rejectComplaint,
@@ -223,6 +224,7 @@ export const ComplaintDetailModal: React.FC<ComplaintDetailModalProps> = ({
                   src={complaint.imageUrl}
                   alt={complaint.id}
                   className="w-full h-full object-cover"
+                  onError={handleImageError}
                 />
                 <span className="absolute bottom-2 left-2 px-2 py-0.5 text-[10px] font-bold bg-black/60 text-white rounded">
                   {complaint.category}
@@ -473,6 +475,7 @@ export const ComplaintDetailModal: React.FC<ComplaintDetailModalProps> = ({
                         src={repairEvidence}
                         alt="Repair evidence"
                         className="w-full h-full object-cover"
+                        onError={(e) => handleImageError(e, FALLBACK_REPAIR_IMAGE)}
                       />
                       <span className="absolute top-2 left-2 px-2.5 py-1 text-[10px] font-bold rounded-lg bg-[#16A36A] text-white">
                         ✓ Repair Evidence Attached
@@ -550,6 +553,7 @@ export const ComplaintDetailModal: React.FC<ComplaintDetailModalProps> = ({
                         src={complaint.imageUrl}
                         alt="Before"
                         className="w-full aspect-[4/3] rounded-lg object-cover border"
+                        onError={handleImageError}
                       />
                     </div>
                     <div>
@@ -558,6 +562,7 @@ export const ComplaintDetailModal: React.FC<ComplaintDetailModalProps> = ({
                         src={complaint.repairEvidenceImage}
                         alt="After"
                         className="w-full aspect-[4/3] rounded-lg object-cover border-2 border-emerald-400"
+                        onError={(e) => handleImageError(e, FALLBACK_REPAIR_IMAGE)}
                       />
                     </div>
                   </div>

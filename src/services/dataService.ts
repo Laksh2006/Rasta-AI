@@ -46,7 +46,47 @@ export const getComplaints = (): Complaint[] => {
       localStorage.setItem(STORAGE_KEY_COMPLAINTS, JSON.stringify(INITIAL_COMPLAINTS));
       return INITIAL_COMPLAINTS;
     }
-    return JSON.parse(raw);
+    const complaints: Complaint[] = JSON.parse(raw);
+    let updated = false;
+    const migrated = complaints.map(c => {
+      const init = INITIAL_COMPLAINTS.find(i => i.id === c.id);
+      let changed = false;
+      let img = c.imageUrl;
+      let repairImg = c.repairEvidenceImage;
+
+      // Automatically migrate legacy or broken external unsplash URLs to verified local assets
+      if (img && (img.includes('unsplash.com') || !img.startsWith('/images/'))) {
+        if (init) {
+          img = init.imageUrl;
+          changed = true;
+        } else if (!img.startsWith('data:')) {
+          img = '/images/fallback.jpg';
+          changed = true;
+        }
+      }
+
+      if (repairImg && (repairImg.includes('unsplash.com') || !repairImg.startsWith('/images/'))) {
+        if (init?.repairEvidenceImage) {
+          repairImg = init.repairEvidenceImage;
+          changed = true;
+        } else if (!repairImg.startsWith('data:')) {
+          repairImg = '/images/repair-2.jpg';
+          changed = true;
+        }
+      }
+
+      if (changed) {
+        updated = true;
+        return { ...c, imageUrl: img, repairEvidenceImage: repairImg };
+      }
+      return c;
+    });
+
+    if (updated) {
+      localStorage.setItem(STORAGE_KEY_COMPLAINTS, JSON.stringify(migrated));
+      return migrated;
+    }
+    return complaints;
   } catch (e) {
     console.error('Failed reading complaints from storage:', e);
     return INITIAL_COMPLAINTS;
@@ -418,7 +458,7 @@ export const getActiveUser = (): User => {
   try {
     const raw = localStorage.getItem(STORAGE_KEY_USER);
     if (raw) return JSON.parse(raw);
-  } catch (e) {}
+  } catch (e) { }
   return DEMO_USERS.citizen;
 };
 

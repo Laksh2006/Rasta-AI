@@ -18,7 +18,7 @@ import {
 import { IssueCategory, IssueSeverity, DemoImage, Complaint } from '../../types';
 import { ImageLibraryModal } from './ImageLibraryModal';
 import { LeafletMap } from '../common/LeafletMap';
-import { DEMO_LOCATIONS } from '../../data/demoImages';
+import { DEMO_LOCATIONS, handleImageError } from '../../data/demoImages';
 import { createComplaint } from '../../services/dataService';
 
 interface ReportIssueFormProps {
@@ -340,6 +340,7 @@ export const ReportIssueForm: React.FC<ReportIssueFormProps> = ({
                 src={selectedImage}
                 alt="Selected road issue"
                 className="w-full h-full object-cover"
+                onError={handleImageError}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20 p-4 flex flex-col justify-between">
                 <div className="flex items-center justify-between">
@@ -440,11 +441,10 @@ export const ReportIssueForm: React.FC<ReportIssueFormProps> = ({
             <button
               type="button"
               onClick={() => setCategory('Pothole')}
-              className={`p-4 rounded-2xl border text-left transition-all flex flex-col justify-between ${
-                category === 'Pothole'
+              className={`p-4 rounded-2xl border text-left transition-all flex flex-col justify-between ${category === 'Pothole'
                   ? 'border-[#142D4E] bg-[#142D4E]/5 ring-2 ring-[#142D4E]'
                   : 'border-slate-200 hover:border-slate-300 bg-white'
-              }`}
+                }`}
             >
               <div className="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center mb-3">
                 <Layers className="w-5 h-5" />
@@ -461,11 +461,10 @@ export const ReportIssueForm: React.FC<ReportIssueFormProps> = ({
             <button
               type="button"
               onClick={() => setCategory('Waterlogging')}
-              className={`p-4 rounded-2xl border text-left transition-all flex flex-col justify-between ${
-                category === 'Waterlogging'
+              className={`p-4 rounded-2xl border text-left transition-all flex flex-col justify-between ${category === 'Waterlogging'
                   ? 'border-[#142D4E] bg-[#142D4E]/5 ring-2 ring-[#142D4E]'
                   : 'border-slate-200 hover:border-slate-300 bg-white'
-              }`}
+                }`}
             >
               <div className="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-600 flex items-center justify-center mb-3">
                 <Droplets className="w-5 h-5" />
@@ -482,11 +481,10 @@ export const ReportIssueForm: React.FC<ReportIssueFormProps> = ({
             <button
               type="button"
               onClick={() => setCategory('Damaged Road')}
-              className={`p-4 rounded-2xl border text-left transition-all flex flex-col justify-between ${
-                category === 'Damaged Road'
+              className={`p-4 rounded-2xl border text-left transition-all flex flex-col justify-between ${category === 'Damaged Road'
                   ? 'border-[#142D4E] bg-[#142D4E]/5 ring-2 ring-[#142D4E]'
                   : 'border-slate-200 hover:border-slate-300 bg-white'
-              }`}
+                }`}
             >
               <div className="w-10 h-10 rounded-xl bg-red-500/10 text-red-600 flex items-center justify-center mb-3">
                 <ShieldAlert className="w-5 h-5" />

@@ -13,6 +13,7 @@ import {
   ShieldAlert
 } from 'lucide-react';
 import { Complaint, ComplaintStatus, IssueCategory } from '../../types';
+import { handleImageError } from '../../data/demoImages';
 
 interface MyReportsProps {
   complaints: Complaint[];
@@ -167,12 +168,7 @@ export const MyReports: React.FC<MyReportsProps> = ({
                       src={report.imageUrl}
                       alt={report.id}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      onError={(e) => {
-                        (e.target as HTMLElement).setAttribute(
-                          'src',
-                          'https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?auto=format&fit=crop&w=400&q=80'
-                        );
-                      }}
+                      onError={handleImageError}
                     />
                     <div className="absolute top-2.5 left-2.5 flex items-center gap-1.5">
                       <span className="px-2.5 py-1 rounded-lg text-[10px] font-mono font-bold bg-black/70 text-white backdrop-blur-sm">

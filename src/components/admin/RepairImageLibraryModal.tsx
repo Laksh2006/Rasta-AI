@@ -1,6 +1,6 @@
 import React from 'react';
 import { X, Check, ShieldCheck, Sparkles } from 'lucide-react';
-import { DEMO_REPAIR_IMAGES } from '../../data/demoImages';
+import { DEMO_REPAIR_IMAGES, handleImageError, FALLBACK_REPAIR_IMAGE } from '../../data/demoImages';
 import { DemoImage } from '../../types';
 
 interface RepairImageLibraryModalProps {
@@ -62,12 +62,7 @@ export const RepairImageLibraryModal: React.FC<RepairImageLibraryModalProps> = (
                     src={image.thumbnail}
                     alt={image.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    onError={(e) => {
-                      (e.target as HTMLElement).setAttribute(
-                        'src',
-                        'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=400&q=80'
-                      );
-                    }}
+                    onError={(e) => handleImageError(e, FALLBACK_REPAIR_IMAGE)}
                   />
                   <span className="absolute top-2.5 left-2.5 px-2.5 py-1 text-[11px] font-bold rounded-lg bg-[#16A36A] text-white flex items-center gap-1 shadow-sm">
                     <Sparkles className="w-3 h-3" />

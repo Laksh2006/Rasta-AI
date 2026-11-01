@@ -28,6 +28,7 @@ import {
   Legend
 } from 'recharts';
 import { Complaint, ComplaintStatus } from '../../types';
+import { handleImageError } from '../../data/demoImages';
 import { LeafletMap } from '../common/LeafletMap';
 
 interface AdminDashboardProps {
@@ -404,6 +405,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                       src={complaint.imageUrl}
                       alt={complaint.id}
                       className="w-10 h-8 rounded object-cover border border-slate-200"
+                      onError={handleImageError}
                     />
                   </td>
                   <td className="py-3 px-4 font-semibold text-slate-800">

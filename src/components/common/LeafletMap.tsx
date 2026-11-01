@@ -193,7 +193,7 @@ export const LeafletMap: React.FC<LeafletMapProps> = ({
       const popupContent = `
         <div style="font-family: 'Plus Jakarta Sans', sans-serif; width: 220px; padding: 4px;">
           <div style="position: relative; width: 100%; height: 110px; border-radius: 8px; overflow: hidden; margin-bottom: 8px; background: #e2e8f0;">
-            <img src="${complaint.imageUrl}" alt="${complaint.id}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?auto=format&fit=crop&w=300&q=80';" />
+            <img src="${complaint.imageUrl}" alt="${complaint.id}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.onerror=null; this.src='/images/fallback.jpg';" />
             <span style="position: absolute; top: 6px; right: 6px; background: ${statusBadgeBg}; color: white; font-size: 10px; font-weight: bold; padding: 2px 7px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.3);">
               ${complaint.status}
             </span>

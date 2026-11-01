@@ -11,6 +11,7 @@ import {
   ArrowUpDown
 } from 'lucide-react';
 import { Complaint, ComplaintStatus, IssueCategory, IssueSeverity } from '../../types';
+import { handleImageError } from '../../data/demoImages';
 
 interface ComplaintListProps {
   complaints: Complaint[];
@@ -173,12 +174,7 @@ export const ComplaintList: React.FC<ComplaintListProps> = ({
                         src={complaint.imageUrl}
                         alt={complaint.id}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                        onError={(e) => {
-                          (e.target as HTMLElement).setAttribute(
-                            'src',
-                            'https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?auto=format&fit=crop&w=200&q=80'
-                          );
-                        }}
+                        onError={handleImageError}
                       />
                     </div>
                   </td>
@@ -202,13 +198,12 @@ export const ComplaintList: React.FC<ComplaintListProps> = ({
                   {/* Severity */}
                   <td className="py-3.5 px-4 whitespace-nowrap">
                     <span
-                      className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                        complaint.severity === 'High'
+                      className={`px-2 py-0.5 rounded text-[10px] font-bold ${complaint.severity === 'High'
                           ? 'bg-red-50 text-red-700 border border-red-200'
                           : complaint.severity === 'Medium'
-                          ? 'bg-amber-50 text-amber-700 border border-amber-200'
-                          : 'bg-slate-100 text-slate-600'
-                      }`}
+                            ? 'bg-amber-50 text-amber-700 border border-amber-200'
+                            : 'bg-slate-100 text-slate-600'
+                        }`}
                     >
                       {complaint.severity}
                     </span>

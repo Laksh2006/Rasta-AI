@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { X, Check, Filter, Image as ImageIcon } from 'lucide-react';
-import { DEMO_ROAD_IMAGES } from '../../data/demoImages';
+import { DEMO_ROAD_IMAGES, handleImageError } from '../../data/demoImages';
 import { DemoImage, IssueCategory } from '../../types';
 
 interface ImageLibraryModalProps {
@@ -60,19 +60,18 @@ export const ImageLibraryModal: React.FC<ImageLibraryModalProps> = ({
           {(['All', 'Pothole', 'Waterlogging', 'Damaged Road'] as const).map(tab => {
             const label =
               tab === 'All' ? 'All Images' :
-              tab === 'Pothole' ? 'Potholes' :
-              tab === 'Damaged Road' ? 'Damaged Roads' : 'Waterlogging';
+                tab === 'Pothole' ? 'Potholes' :
+                  tab === 'Damaged Road' ? 'Damaged Roads' : 'Waterlogging';
             const isSelected = activeTab === tab;
             return (
               <button
                 key={tab}
                 type="button"
                 onClick={() => setActiveTab(tab)}
-                className={`px-4 py-1.5 text-xs font-semibold rounded-full transition-all ${
-                  isSelected
+                className={`px-4 py-1.5 text-xs font-semibold rounded-full transition-all ${isSelected
                     ? 'bg-[#142D4E] text-white shadow-sm'
                     : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                }`}
+                  }`}
               >
                 {label}
               </button>
@@ -87,11 +86,10 @@ export const ImageLibraryModal: React.FC<ImageLibraryModalProps> = ({
             return (
               <div
                 key={image.id}
-                className={`group bg-white rounded-2xl overflow-hidden border transition-all duration-200 flex flex-col hover:shadow-md ${
-                  isSelected
+                className={`group bg-white rounded-2xl overflow-hidden border transition-all duration-200 flex flex-col hover:shadow-md ${isSelected
                     ? 'border-[#16A36A] ring-2 ring-[#16A36A]/20'
                     : 'border-slate-200/90 hover:border-slate-300'
-                }`}
+                  }`}
               >
                 {/* Image Thumbnail */}
                 <div className="relative aspect-[4/3] bg-slate-200 overflow-hidden">
@@ -99,13 +97,7 @@ export const ImageLibraryModal: React.FC<ImageLibraryModalProps> = ({
                     src={image.thumbnail}
                     alt={image.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    onError={(e) => {
-                      // Fallback in case of network issue
-                      (e.target as HTMLElement).setAttribute(
-                        'src',
-                        'https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?auto=format&fit=crop&w=400&q=80'
-                      );
-                    }}
+                    onError={handleImageError}
                   />
                   {/* Category Pill */}
                   <span className="absolute top-2.5 left-2.5 px-2.5 py-1 text-[11px] font-bold rounded-lg bg-black/65 text-white backdrop-blur-md">
@@ -136,11 +128,10 @@ export const ImageLibraryModal: React.FC<ImageLibraryModalProps> = ({
                     <button
                       type="button"
                       onClick={() => onSelectImage(image)}
-                      className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors flex items-center gap-1.5 ${
-                        isSelected
+                      className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors flex items-center gap-1.5 ${isSelected
                           ? 'bg-[#16A36A] text-white hover:bg-[#138a59]'
                           : 'bg-[#142D4E] text-white hover:bg-[#0f233d]'
-                      }`}
+                        }`}
                     >
                       {isSelected ? (
                         <>

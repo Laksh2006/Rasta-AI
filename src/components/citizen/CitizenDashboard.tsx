@@ -14,6 +14,7 @@ import {
   ArrowUpRight
 } from 'lucide-react';
 import { Complaint, User } from '../../types';
+import { handleImageError } from '../../data/demoImages';
 
 interface CitizenDashboardProps {
   user: User;
@@ -175,11 +176,11 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
             {recentReports.map(report => {
               const statusBg =
                 report.status === 'Resolved' ? 'bg-emerald-100 text-emerald-800' :
-                report.status === 'In Progress' ? 'bg-amber-100 text-amber-800' :
-                report.status === 'Assigned' ? 'bg-purple-100 text-purple-800' :
-                report.status === 'Verified' ? 'bg-blue-100 text-blue-800' :
-                report.status === 'Rejected' ? 'bg-red-100 text-red-800' :
-                'bg-orange-100 text-orange-800';
+                  report.status === 'In Progress' ? 'bg-amber-100 text-amber-800' :
+                    report.status === 'Assigned' ? 'bg-purple-100 text-purple-800' :
+                      report.status === 'Verified' ? 'bg-blue-100 text-blue-800' :
+                        report.status === 'Rejected' ? 'bg-red-100 text-red-800' :
+                          'bg-orange-100 text-orange-800';
 
               return (
                 <div
@@ -193,12 +194,7 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
                       src={report.imageUrl}
                       alt={report.id}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      onError={(e) => {
-                        (e.target as HTMLElement).setAttribute(
-                          'src',
-                          'https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?auto=format&fit=crop&w=300&q=80'
-                        );
-                      }}
+                      onError={handleImageError}
                     />
                     <span className="absolute bottom-1 left-1 px-1.5 py-0.5 text-[9px] font-mono font-bold bg-black/70 text-white rounded">
                       {report.id}
